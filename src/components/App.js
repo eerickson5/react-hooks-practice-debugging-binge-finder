@@ -32,6 +32,7 @@ function App() {
   }
 
   function selectShow(show) {
+    console.log(show)
     Adapter.getShowEpisodes(show.id).then((episodes) => {
       setSelectedShow(show);
       setEpisodes(episodes);
@@ -55,7 +56,7 @@ function App() {
           {!!selectedShow ? (
             <SelectedShowContainer
               selectedShow={selectedShow}
-              allEpisodes={episodes}
+              episodes={episodes}
             />
           ) : (
             <div />
