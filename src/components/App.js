@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Grid } from "semantic-ui-react";
 import Adapter from "../Adapter";
-import useGetShows from "../useGetShows";
 import TVShowList from "./TVShowList";
 import Nav from "./Nav";
 import SelectedShowContainer from "./SelectedShowContainer";
@@ -32,7 +31,6 @@ function App() {
   }
 
   function selectShow(show) {
-    console.log(show)
     Adapter.getShowEpisodes(show.id).then((episodes) => {
       setSelectedShow(show);
       setEpisodes(episodes);
@@ -42,6 +40,9 @@ function App() {
   let displayShows = shows;
   if (filterByRating) {
     displayShows = displayShows.filter((s) => s.rating.average >= filterByRating);
+  }
+  if(searchTerm) {
+    displayShows = displayShows.filter((s) => s.name.toLowerCase().includes(searchTerm));
   }
 
   return (
