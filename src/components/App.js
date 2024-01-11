@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Grid } from "semantic-ui-react";
 import Adapter from "../Adapter";
+import useGetShows from "../useGetShows";
 import TVShowList from "./TVShowList";
 import Nav from "./Nav";
 import SelectedShowContainer from "./SelectedShowContainer";
@@ -13,7 +14,7 @@ function App() {
   const [filterByRating, setFilterByRating] = useState("");
 
   useEffect(() => {
-    Adapter.getShows().then((shows) => setShows(shows));
+    Adapter.getShows().then((rShows) => setShows(rShows));
   }, []);
 
   useEffect(() => {
@@ -39,9 +40,7 @@ function App() {
 
   let displayShows = shows;
   if (filterByRating) {
-    displayShows = displayShows.filter((s) => {
-      s.rating.average >= filterByRating;
-    });
+    displayShows = displayShows.filter((s) => s.rating.average >= filterByRating);
   }
 
   return (
